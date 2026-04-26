@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "synthgen"
+version = "1.0.0"
+description = "Production-ready random data generation library with comprehensive domain coverage"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "SynthGen Contributors"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = [
+    "data-generation", "synthetic-data", "mock-data", "fake-data",
+    "testing", "fixtures", "random-data", "test-data"
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "hypothesis>=6.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+]
+docs = [
+    "sphinx>=6.0",
+    "sphinx-rtd-theme>=1.0",
+]
+performance = [
+    "numpy>=1.20",
+]
+
+[project.urls]
+Homepage = "https://github.com/synthgen/synthgen"
+Documentation = "https://synthgen.readthedocs.io"
+Repository = "https://github.com/synthgen/synthgen.git"
+Issues = "https://github.com/synthgen/synthgen/issues"
+Changelog = "https://github.com/synthgen/synthgen/blob/main/CHANGELOG.md"
+
+[project.scripts]
+synthgen = "synthgen.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311', 'py312']
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I", "N", "D", "UP"]
+ignore = ["D100", "D104"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --cov=synthgen --cov-report=term-missing"
